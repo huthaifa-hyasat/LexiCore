@@ -27,4 +27,8 @@ int dictionary_delete(Dictionary *dictionary, const char *word);
 
 void dictionary_free(Dictionary *dictionary);
 
+int dictionary_load(Dictionary *dictionary, const char *filename);
+
+int dictionary_validate_line(const char *line);
+
 #endif

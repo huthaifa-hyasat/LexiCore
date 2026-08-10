@@ -3,27 +3,17 @@
 
 int main(void)
 {
-    Dictionary *dictionary = dictionary_create(101);
+    const char *valid_line =
+        "apple|A fruit|noun|I ate an apple.";
 
-    if (dictionary == NULL)
-    {
-        printf("Dictionary creation failed!\n");
-        return 1;
-    }
+    const char *invalid_line =
+        "apple|A fruit|noun";
 
-    dictionary_insert(
-        dictionary,
-        "apple",
-        "A fruit",
-        "noun",
-        "I ate an apple."
-    );
+    printf("Valid line: %s\n",
+           dictionary_validate_line(valid_line) ? "PASS" : "FAIL");
 
-    printf("Entries before free: %zu\n", dictionary->entry_count);
-
-    dictionary_free(dictionary);
-
-    printf("Dictionary memory freed successfully!\n");
+    printf("Invalid line: %s\n",
+           dictionary_validate_line(invalid_line) ? "FAIL" : "PASS");
 
     return 0;
 }

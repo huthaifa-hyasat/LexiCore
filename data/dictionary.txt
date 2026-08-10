@@ -1,0 +1,3 @@
+apple|A fruit|noun|I ate an apple.
+book|A set of written pages|noun|I read a book.
+run|To move quickly|verb|I run every morning.

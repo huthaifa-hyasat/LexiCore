@@ -1,6 +1,7 @@
 #include "hash_table.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 size_t hash_function(const char *word, size_t bucket_count){
     unsigned long hash = 5381;
@@ -161,6 +162,7 @@ int dictionary_delete(Dictionary *dictionary, const char *word)
 
 void dictionary_free(Dictionary *dictionary)
 {
+    
     if (dictionary == NULL)
     {
         return;
@@ -186,4 +188,87 @@ void dictionary_free(Dictionary *dictionary)
 
     free(dictionary->buckets);
     free(dictionary);
+}
+
+int dictionary_load(Dictionary *dictionary, const char *filename)
+{
+    if (dictionary == NULL || filename == NULL)
+    {
+        return 0;
+    }
+
+    FILE *file = fopen(filename, "r");
+
+    if (file == NULL)
+    {
+        return 0;
+    }
+
+    char line[1024];
+
+    while (fgets(line, sizeof(line), file) != NULL)
+    {
+        line[strcspn(line, "\n")] = '\0';
+
+        char *word = strtok(line, "|");
+        char *definition = strtok(NULL, "|");
+        char *part_of_speech = strtok(NULL, "|");
+        char *example_sentence = strtok(NULL, "|");
+
+        if (word == NULL ||
+            definition == NULL ||
+            part_of_speech == NULL ||
+            example_sentence == NULL)
+        {
+            continue;
+        }
+
+        dictionary_insert(
+            dictionary,
+            word,
+            definition,
+            part_of_speech,
+            example_sentence
+        );
+    }
+
+    fclose(file);
+
+    return 1;
+}
+
+int dictionary_validate_line(const char *line)
+{
+    if (line == NULL || line[0] == '\0')
+    {
+        return 0;
+    }
+
+    char copy[1024];
+
+    strncpy(copy, line, sizeof(copy) - 1);
+    copy[sizeof(copy) - 1] = '\0';
+
+    char *word = strtok(copy, "|");
+    char *definition = strtok(NULL, "|");
+    char *part_of_speech = strtok(NULL, "|");
+    char *example_sentence = strtok(NULL, "|");
+
+    if (word == NULL ||
+        definition == NULL ||
+        part_of_speech == NULL ||
+        example_sentence == NULL)
+    {
+        return 0;
+    }
+
+    if (word[0] == '\0' ||
+        definition[0] == '\0' ||
+        part_of_speech[0] == '\0' ||
+        example_sentence[0] == '\0')
+    {
+        return 0;
+    }
+
+    return 1;
 }

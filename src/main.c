@@ -11,7 +11,7 @@ int main(void)
         return 1;
     }
 
-    int first_insert = dictionary_insert(
+    dictionary_insert(
         dictionary,
         "apple",
         "A fruit",
@@ -19,21 +19,24 @@ int main(void)
         "I ate an apple."
     );
 
-    int duplicate_insert = dictionary_insert(
+    dictionary_insert(
         dictionary,
-        "apple",
-        "Another definition",
+        "book",
+        "A set of written pages",
         "noun",
-        "I like apples."
+        "I read a book."
     );
 
-    printf("First insert: %s\n",
-           first_insert ? "PASS" : "FAIL");
-
-    printf("Duplicate insert: %s\n",
-           duplicate_insert == 0 ? "PASS" : "FAIL");
-
-    printf("Total entries: %zu\n", dictionary->entry_count);
+    if (dictionary_save(dictionary, "data/saved_dictionary.txt"))
+    {
+        printf("Dictionary saved successfully!\n");
+    }
+    else
+    {
+        printf("Failed to save dictionary!\n");
+        dictionary_free(dictionary);
+        return 1;
+    }
 
     dictionary_free(dictionary);
 

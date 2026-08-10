@@ -284,3 +284,41 @@ int dictionary_validate_line(const char *line)
 
     return 1;
 }
+
+int dictionary_save(const Dictionary *dictionary, const char *filename)
+{
+    if (dictionary == NULL || filename == NULL)
+    {
+        return 0;
+    }
+
+    FILE *file = fopen(filename, "w");
+
+    if (file == NULL)
+    {
+        return 0;
+    }
+
+    for (size_t i = 0; i < dictionary->bucket_count; i++)
+    {
+        DictionaryEntry *current = dictionary->buckets[i];
+
+        while (current != NULL)
+        {
+            fprintf(
+                file,
+                "%s|%s|%s|%s\n",
+                current->word,
+                current->definition,
+                current->part_of_speech,
+                current->example_sentence
+            );
+
+            current = current->next;
+        }
+    }
+
+    fclose(file);
+
+    return 1;
+}

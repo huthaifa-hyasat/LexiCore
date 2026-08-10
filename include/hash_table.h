@@ -31,4 +31,6 @@ int dictionary_load(Dictionary *dictionary, const char *filename);
 
 int dictionary_validate_line(const char *line);
 
+int dictionary_save(const Dictionary *dictionary, const char *filename);
+
 #endif

@@ -1,0 +1,2 @@
+book|A set of written pages|noun|I read a book.
+apple|A fruit|noun|I ate an apple.

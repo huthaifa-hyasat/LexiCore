@@ -52,6 +52,18 @@ int dictionary_insert(
 
     size_t index = hash_function(word, dictionary->bucket_count);
 
+    DictionaryEntry *current = dictionary->buckets[index];
+
+while (current != NULL)
+{
+    if (strcmp(current->word, word) == 0)
+    {
+        return 0;
+    }
+
+    current = current->next;
+}
+
     DictionaryEntry *entry = malloc(sizeof(DictionaryEntry));
 
     if (entry == NULL)

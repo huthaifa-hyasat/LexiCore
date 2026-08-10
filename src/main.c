@@ -3,17 +3,39 @@
 
 int main(void)
 {
-    const char *valid_line =
-        "apple|A fruit|noun|I ate an apple.";
+    Dictionary *dictionary = dictionary_create(101);
 
-    const char *invalid_line =
-        "apple|A fruit|noun";
+    if (dictionary == NULL)
+    {
+        printf("Dictionary creation failed!\n");
+        return 1;
+    }
 
-    printf("Valid line: %s\n",
-           dictionary_validate_line(valid_line) ? "PASS" : "FAIL");
+    int first_insert = dictionary_insert(
+        dictionary,
+        "apple",
+        "A fruit",
+        "noun",
+        "I ate an apple."
+    );
 
-    printf("Invalid line: %s\n",
-           dictionary_validate_line(invalid_line) ? "FAIL" : "PASS");
+    int duplicate_insert = dictionary_insert(
+        dictionary,
+        "apple",
+        "Another definition",
+        "noun",
+        "I like apples."
+    );
+
+    printf("First insert: %s\n",
+           first_insert ? "PASS" : "FAIL");
+
+    printf("Duplicate insert: %s\n",
+           duplicate_insert == 0 ? "PASS" : "FAIL");
+
+    printf("Total entries: %zu\n", dictionary->entry_count);
+
+    dictionary_free(dictionary);
 
     return 0;
 }

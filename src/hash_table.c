@@ -322,3 +322,56 @@ int dictionary_save(const Dictionary *dictionary, const char *filename)
 
     return 1;
 }
+
+int dictionary_edit(
+    Dictionary *dictionary,
+    const char *word,
+    const char *definition,
+    const char *part_of_speech,
+    const char *example_sentence)
+{
+    if (dictionary == NULL ||
+        word == NULL ||
+        definition == NULL ||
+        part_of_speech == NULL ||
+        example_sentence == NULL)
+    {
+        return 0;
+    }
+
+    DictionaryEntry *entry = dictionary_search(dictionary, word);
+
+    if (entry == NULL)
+    {
+        return 0;
+    }
+
+    char *new_definition = malloc(strlen(definition) + 1);
+    char *new_part_of_speech = malloc(strlen(part_of_speech) + 1);
+    char *new_example_sentence = malloc(strlen(example_sentence) + 1);
+
+    if (new_definition == NULL ||
+        new_part_of_speech == NULL ||
+        new_example_sentence == NULL)
+    {
+        free(new_definition);
+        free(new_part_of_speech);
+        free(new_example_sentence);
+
+        return 0;
+    }
+
+    strcpy(new_definition, definition);
+    strcpy(new_part_of_speech, part_of_speech);
+    strcpy(new_example_sentence, example_sentence);
+
+    free(entry->definition);
+    free(entry->part_of_speech);
+    free(entry->example_sentence);
+
+    entry->definition = new_definition;
+    entry->part_of_speech = new_part_of_speech;
+    entry->example_sentence = new_example_sentence;
+
+    return 1;
+}

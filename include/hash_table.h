@@ -33,4 +33,6 @@ int dictionary_validate_line(const char *line);
 
 int dictionary_save(const Dictionary *dictionary, const char *filename);
 
+int dictionary_edit(Dictionary *dictionary,const char *word,const char *definition,const char *part_of_speech,const char *example_sentence);
+
 #endif

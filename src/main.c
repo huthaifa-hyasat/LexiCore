@@ -19,23 +19,31 @@ int main(void)
         "I ate an apple."
     );
 
-    dictionary_insert(
+    int result = dictionary_edit(
         dictionary,
-        "book",
-        "A set of written pages",
+        "apple",
+        "A round fruit that can be red or green",
         "noun",
-        "I read a book."
+        "I eat an apple every day."
     );
 
-    if (dictionary_save(dictionary, "data/saved_dictionary.txt"))
+    if (result)
     {
-        printf("Dictionary saved successfully!\n");
+        printf("Edit successful!\n");
     }
     else
     {
-        printf("Failed to save dictionary!\n");
-        dictionary_free(dictionary);
-        return 1;
+        printf("Edit failed!\n");
+    }
+
+    DictionaryEntry *entry = dictionary_search(dictionary, "apple");
+
+    if (entry != NULL)
+    {
+        printf("Word: %s\n", entry->word);
+        printf("Definition: %s\n", entry->definition);
+        printf("Part of speech: %s\n", entry->part_of_speech);
+        printf("Example: %s\n", entry->example_sentence);
     }
 
     dictionary_free(dictionary);

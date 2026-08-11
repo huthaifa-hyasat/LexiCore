@@ -375,3 +375,36 @@ int dictionary_edit(
 
     return 1;
 }
+
+void dictionary_prefix_search(
+    const Dictionary *dictionary,
+    const char *prefix)
+{
+    if (dictionary == NULL || prefix == NULL || prefix[0] == '\0')
+    {
+        return;
+    }
+
+    size_t prefix_length = strlen(prefix);
+
+    for (size_t i = 0; i < dictionary->bucket_count; i++)
+    {
+        DictionaryEntry *current = dictionary->buckets[i];
+
+        while (current != NULL)
+        {
+            if (strncmp(current->word, prefix, prefix_length) == 0)
+            {
+                printf(
+                    "%s | %s | %s | %s\n",
+                    current->word,
+                    current->definition,
+                    current->part_of_speech,
+                    current->example_sentence
+                );
+            }
+
+            current = current->next;
+        }
+    }
+}

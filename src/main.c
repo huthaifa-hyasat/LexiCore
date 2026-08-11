@@ -19,32 +19,25 @@ int main(void)
         "I ate an apple."
     );
 
-    int result = dictionary_edit(
+    dictionary_insert(
         dictionary,
-        "apple",
-        "A round fruit that can be red or green",
+        "application",
+        "A program or software",
         "noun",
-        "I eat an apple every day."
+        "I installed an application."
     );
 
-    if (result)
-    {
-        printf("Edit successful!\n");
-    }
-    else
-    {
-        printf("Edit failed!\n");
-    }
+    dictionary_insert(
+        dictionary,
+        "banana",
+        "A yellow fruit",
+        "noun",
+        "I ate a banana."
+    );
 
-    DictionaryEntry *entry = dictionary_search(dictionary, "apple");
+    printf("Prefix search results for 'app':\n");
 
-    if (entry != NULL)
-    {
-        printf("Word: %s\n", entry->word);
-        printf("Definition: %s\n", entry->definition);
-        printf("Part of speech: %s\n", entry->part_of_speech);
-        printf("Example: %s\n", entry->example_sentence);
-    }
+    dictionary_prefix_search(dictionary, "app");
 
     dictionary_free(dictionary);
 

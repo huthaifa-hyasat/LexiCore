@@ -408,3 +408,57 @@ void dictionary_prefix_search(
         }
     }
 }
+void dictionary_display_alphabetical(const Dictionary *dictionary)
+{
+    if (dictionary == NULL || dictionary->entry_count == 0)
+    {
+        return;
+    }
+
+    DictionaryEntry **entries =
+        malloc(dictionary->entry_count * sizeof(DictionaryEntry *));
+
+    if (entries == NULL)
+    {
+        return;
+    }
+
+    size_t count = 0;
+
+    for (size_t i = 0; i < dictionary->bucket_count; i++)
+    {
+        DictionaryEntry *current = dictionary->buckets[i];
+
+        while (current != NULL)
+        {
+            entries[count++] = current;
+            current = current->next;
+        }
+    }
+
+    for (size_t i = 0; i < count - 1; i++)
+    {
+        for (size_t j = 0; j < count - i - 1; j++)
+        {
+            if (strcmp(entries[j]->word, entries[j + 1]->word) > 0)
+            {
+                DictionaryEntry *temp = entries[j];
+                entries[j] = entries[j + 1];
+                entries[j + 1] = temp;
+            }
+        }
+    }
+
+    for (size_t i = 0; i < count; i++)
+    {
+        printf(
+            "%s | %s | %s | %s\n",
+            entries[i]->word,
+            entries[i]->definition,
+            entries[i]->part_of_speech,
+            entries[i]->example_sentence
+        );
+    }
+
+    free(entries);
+}

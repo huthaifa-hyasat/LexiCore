@@ -13,10 +13,26 @@ int main(void)
 
     dictionary_insert(
         dictionary,
+        "banana",
+        "A yellow fruit",
+        "noun",
+        "I ate a banana."
+    );
+
+    dictionary_insert(
+        dictionary,
         "apple",
         "A fruit",
         "noun",
         "I ate an apple."
+    );
+
+    dictionary_insert(
+        dictionary,
+        "book",
+        "A set of written pages",
+        "noun",
+        "I read a book."
     );
 
     dictionary_insert(
@@ -27,17 +43,9 @@ int main(void)
         "I installed an application."
     );
 
-    dictionary_insert(
-        dictionary,
-        "banana",
-        "A yellow fruit",
-        "noun",
-        "I ate a banana."
-    );
+    printf("Alphabetical dictionary:\n");
 
-    printf("Prefix search results for 'app':\n");
-
-    dictionary_prefix_search(dictionary, "app");
+    dictionary_display_alphabetical(dictionary);
 
     dictionary_free(dictionary);
 

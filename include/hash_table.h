@@ -37,4 +37,6 @@ int dictionary_edit(Dictionary *dictionary,const char *word,const char *definiti
 
 void dictionary_prefix_search(const Dictionary *dictionary,const char *prefix);
 
+void dictionary_display_alphabetical(const Dictionary *dictionary);
+
 #endif

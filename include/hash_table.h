@@ -39,4 +39,6 @@ void dictionary_prefix_search(const Dictionary *dictionary,const char *prefix);
 
 void dictionary_display_alphabetical(const Dictionary *dictionary);
 
+void dictionary_statistics(const Dictionary *dictionary);
+
 #endif

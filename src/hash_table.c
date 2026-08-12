@@ -462,3 +462,46 @@ void dictionary_display_alphabetical(const Dictionary *dictionary)
 
     free(entries);
 }
+void dictionary_statistics(const Dictionary *dictionary)
+{
+    if (dictionary == NULL)
+    {
+        return;
+    }
+
+    size_t used_buckets = 0;
+    size_t largest_bucket = 0;
+
+    for (size_t i = 0; i < dictionary->bucket_count; i++)
+    {
+        size_t bucket_size = 0;
+        DictionaryEntry *current = dictionary->buckets[i];
+
+        while (current != NULL)
+        {
+            bucket_size++;
+            current = current->next;
+        }
+
+        if (bucket_size > 0)
+        {
+            used_buckets++;
+        }
+
+        if (bucket_size > largest_bucket)
+        {
+            largest_bucket = bucket_size;
+        }
+    }
+
+    double average =
+        (dictionary->bucket_count > 0)
+            ? (double)dictionary->entry_count / dictionary->bucket_count
+            : 0.0;
+
+    printf("Total entries: %zu\n", dictionary->entry_count);
+    printf("Total buckets: %zu\n", dictionary->bucket_count);
+    printf("Used buckets: %zu\n", used_buckets);
+    printf("Largest bucket: %zu\n", largest_bucket);
+    printf("Average entries per bucket: %.2f\n", average);
+}

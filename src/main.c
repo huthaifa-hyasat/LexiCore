@@ -13,18 +13,18 @@ int main(void)
 
     dictionary_insert(
         dictionary,
-        "banana",
-        "A yellow fruit",
-        "noun",
-        "I ate a banana."
-    );
-
-    dictionary_insert(
-        dictionary,
         "apple",
         "A fruit",
         "noun",
         "I ate an apple."
+    );
+
+    dictionary_insert(
+        dictionary,
+        "banana",
+        "A yellow fruit",
+        "noun",
+        "I ate a banana."
     );
 
     dictionary_insert(
@@ -35,17 +35,9 @@ int main(void)
         "I read a book."
     );
 
-    dictionary_insert(
-        dictionary,
-        "application",
-        "A program or software",
-        "noun",
-        "I installed an application."
-    );
+    printf("Dictionary Statistics:\n");
 
-    printf("Alphabetical dictionary:\n");
-
-    dictionary_display_alphabetical(dictionary);
+    dictionary_statistics(dictionary);
 
     dictionary_free(dictionary);
 

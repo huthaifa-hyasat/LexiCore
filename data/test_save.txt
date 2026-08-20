@@ -1,0 +1,5 @@
+book|noun|test|test
+banana|noun|test|test
+apple|noun|test|test
+apple |noun|aaaaa|ddddd
+appllication|test|test|test

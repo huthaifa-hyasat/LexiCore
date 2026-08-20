@@ -1,0 +1,5 @@
+apple | noun | A fruit | I ate an apple.
+banana|noun|A yellow fruit|I ate a banana.
+invalid line
+apple | noun | Duplicate apple | Another apple.
+orange | noun | A fruit

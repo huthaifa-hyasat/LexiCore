@@ -35,7 +35,7 @@ int dictionary_save(const Dictionary *dictionary, const char *filename);
 
 int dictionary_edit(Dictionary *dictionary,const char *word,const char *definition,const char *part_of_speech,const char *example_sentence);
 
-void dictionary_prefix_search(const Dictionary *dictionary,const char *prefix);
+size_t dictionary_prefix_search(const Dictionary *dictionary,const char *prefix);
 
 void dictionary_display_alphabetical(const Dictionary *dictionary);
 

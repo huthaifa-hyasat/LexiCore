@@ -51,3 +51,4 @@ LexiCore/
 ├── CONTRIBUTIONS.md
 ├── Makefile
 └── README.md
+Conflict test - master branch

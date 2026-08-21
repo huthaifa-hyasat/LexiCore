@@ -33,6 +33,7 @@ void print_menu(void)
 
 void add_word(Dictionary *dictionary)
 {
+    
     char word[MAX_INPUT];
     char definition[MAX_INPUT];
     char part_of_speech[MAX_INPUT];
@@ -41,6 +42,11 @@ void add_word(Dictionary *dictionary)
     printf("Enter word: ");
     read_line(word, sizeof(word));
 
+    if (dictionary_search(dictionary, word) != NULL)
+{
+    printf("Word already exists.\n");
+    return;
+}
     printf("Enter definition: ");
     read_line(definition, sizeof(definition));
 
